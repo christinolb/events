@@ -2,26 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/**adding code to all files using tailwind syntax*/
+/**must use @apply*/
+
+form > div {
+  @apply flex flex-col gap-2;
+}
+/**applied to input and text area elements*/
+input,
+textarea {
+  @apply shadow-md px-6 py-2 border border-slate-300;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+li {
+  @apply m-2 p-2 border bg-gray-600 text-white font-bold rounded-xl
 }
