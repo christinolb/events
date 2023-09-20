@@ -1,8 +1,4 @@
 'use client';
-{/**TO DO:
-* Make dropdown with title of each event document */}
-
-
 
 //must include use client when using useState!
 import { useState } from "react";
@@ -14,20 +10,11 @@ export default function ContactForm() {
     const [eventTimeStart, setEventStart] = useState('')
     const [eventTimeEnd, setEventEnd] = useState('')
     const [eventDescription, setEventDescription] = useState('')
-    const [error, setError] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        //showing data
-        console.log(eventTitle);
-        console.log(eventDate);
-        console.log(eventLocation);
-        console.log(eventTimeStart);
-        console.log(eventTimeEnd);
-        console.log(eventDescription);
-
-        const res = await fetch('/api/contact', {
+        const res = await fetch('/api/contactUpdate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -57,28 +44,15 @@ export default function ContactForm() {
         if(!res.ok){
           alert("Error sending message")
         }
-
-        const {msg} = await res.json();
-        setError(msg);
-        console.log(error);
     };
-
-    //for loop for dropdown
-    {/**const prevEvents = []
-        const eventsJson; // json obj of all documents
-        for (i in length(eventsJson){
-            <option value=eventsJson[i]>eventsJson[i]</option>
-        }*/}
 
     return (
         <>
             <form onSubmit={handleSubmit} className="py-4 mt-4 border-t flex flex-col gap-5">
                 {/**dropdown to select previous events */}
                 <div>
-                    <lable htmlFor="event">Previous Events</lable>
-                    <select>
+                    <h1 className="">Choose from event below</h1>
 
-                    </select>
                 </div>
 
                 <div>
@@ -149,10 +123,6 @@ export default function ContactForm() {
                 className="bg-green-700 p-3 text-white font-bold"
                     type="submit">Post Event</button>
             </form>
-
-            <div className="bg-slate-100 flex flex-col">
-                <div className="text-red-600 px-5 py-2">Error Message</div>
-            </div>
         </>
     )
 }

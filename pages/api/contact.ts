@@ -16,32 +16,39 @@ const client = new MongoClient(uri, {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(req.body)    
 
+    //retrieval of data from clientside
+    //variables must be in same order as stored in JSON
     const {
         eventTitle,
-        eventDate,
         eventLocation,
+        eventDate,
         eventTimeStart,
         eventTimeEnd,
         eventDescription
     } = req.body;
 
-    async function Add_Document(title, location, date, startTime, endTime, description) {
+    //function which takes in and send data from client to db
+    async function Add_Document(title, date, location, startTime, endTime, description) {
         try {
           //connect to DB
           await client.connect();
       
-      
+          //select db
           const myDB = client.db("web_content_test");
+
+          //select cluster
           const myColl = myDB.collection("events");
-      
+          
+          //create 
           const docs = [
             {
-               title: {title},
-               location: {location},
-               date: {date},
-               startTime: {startTime},
-               endTime: {endTime},
-               description: {description}
+               id: 1,
+               title: {title}.title,
+               location: {location}.location,
+               date: {date}.date,
+               startTime: {startTime}.startTime,
+               endTime: {endTime}.endTime,
+               description: {description}.description
             },
           ];
       

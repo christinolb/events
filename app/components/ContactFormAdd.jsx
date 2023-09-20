@@ -9,19 +9,11 @@ export default function ContactForm() {
     const [eventTimeStart, setEventStart] = useState('')
     const [eventTimeEnd, setEventEnd] = useState('')
     const [eventDescription, setEventDescription] = useState('')
-    const [error, setError] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        //showing data
-        console.log(eventTitle);
-        console.log(eventDate);
-        console.log(eventLocation);
-        console.log(eventTimeStart);
-        console.log(eventTimeEnd);
-        console.log(eventDescription);
-
+        //sending data to /pages/api/contact.ts
         const res = await fetch('/api/contact', {
             method: 'POST',
             headers: {
@@ -53,9 +45,6 @@ export default function ContactForm() {
           alert("Error sending message")
         }
 
-        const {msg} = await res.json();
-        setError(msg);
-        console.log(error);
     };
 
     return (
@@ -129,10 +118,6 @@ export default function ContactForm() {
                 className="bg-green-700 p-3 text-white font-bold"
                     type="submit">Post Event</button>
             </form>
-
-            <div className="bg-slate-100 flex flex-col">
-                <div className="text-red-600 px-5 py-2">Error Message</div>
-            </div>
         </>
     )
 }
