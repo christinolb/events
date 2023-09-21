@@ -1,3 +1,4 @@
+//ADD DOCUMENT API
 import type { NextApiRequest, NextApiResponse } from "next";
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = 'mongodb+srv://christinobarbosa09:jerrysiceparty77@cluster0.6zcmnen.mongodb.net/?retryWrites=true&w=majority';
@@ -39,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           //select cluster
           const myColl = myDB.collection("events");
           
-          //create 
+          //create obj
           const docs = [
             {
                id: 1,

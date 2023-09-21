@@ -1,3 +1,5 @@
+//QUERIES TITLES AND SHOWES TO USER
+
 //need validation for title select get length of array!
 
 import ContactFormEdit from "../components/ContactFormEdit"
@@ -62,7 +64,7 @@ export default function Edit() {
       {/**select document number */}
       <form>
         <label className="px-2" htmlFor="slctTitle">Select Title</label>
-        <input type="number" value={} id="slctTitle"/>
+        <input type="number" id="slctTitle"/>
         <input className="bg-green-700 text-white font-bold" type="submit" value="Submit"/>
       </form>
       <ContactFormEdit />

@@ -123,6 +123,13 @@ export default function ContactForm() {
                 className="bg-green-700 p-3 text-white font-bold"
                     type="submit">Post Event</button>
             </form>
+            <div className="pl-[20px] ">
+                <button
+                    className="m-2 p-2 border bg-red-600 text-white font-bold rounded-xl"
+                    >
+                    Remove
+                </button>
+            </div>
         </>
     )
 }
