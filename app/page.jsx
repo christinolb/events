@@ -1,4 +1,4 @@
-import FormTypeButtons from "./components/FormType"
+import FormTypeButtons from "./components/FormSelctButtons"
 import ContactFormAdd from "./components/ContactFormAdd"
 
 export default function Home() {

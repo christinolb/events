@@ -1,4 +1,5 @@
 //ADD DOCUMENT API
+//RETRIEVES DATA FROM CLIENT AND STORES IN DATABASE
 import type { NextApiRequest, NextApiResponse } from "next";
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = 'mongodb+srv://christinobarbosa09:jerrysiceparty77@cluster0.6zcmnen.mongodb.net/?retryWrites=true&w=majority';
@@ -29,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } = req.body;
 
     //function which takes in and send data from client to db
-    async function Add_Document(title, date, location, startTime, endTime, description) {
+    async function Add_Document(title: string, date: string, location: string, startTime: string, endTime: string, description: string) {
         try {
           //connect to DB
           await client.connect();

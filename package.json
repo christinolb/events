@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "nodemon C:/wamp64/www/events-form/app/models/read-document.js"
+    "serve": "nodemon /wamp64/www/events-form/app/lib/connectDB.js"
   },
   "dependencies": {
     "autoprefixer": "10.4.15",

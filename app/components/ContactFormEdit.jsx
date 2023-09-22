@@ -3,7 +3,7 @@
 //must include use client when using useState!
 import { useState } from "react";
 
-export default function ContactForm() {
+export default function ContactFormEdit() {
     const [eventTitle, setEventTitle] = useState('')
     const [eventDate, setEventDate] = useState('')
     const [eventLocation, setEventLocation] = useState('')
