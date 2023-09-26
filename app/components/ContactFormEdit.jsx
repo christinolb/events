@@ -1,9 +1,11 @@
 'use client';
 
-//must include use client when using useState!
+//MISSING: make main form unusable until a title is selected
+
 import { useState } from "react";
 
 export default function ContactFormEdit() {
+    //Main form
     const [eventTitle, setEventTitle] = useState('')
     const [eventDate, setEventDate] = useState('')
     const [eventLocation, setEventLocation] = useState('')
@@ -11,10 +13,84 @@ export default function ContactFormEdit() {
     const [eventTimeEnd, setEventEnd] = useState('')
     const [eventDescription, setEventDescription] = useState('')
 
-    const handleSubmit = async (e) => {
+    //set useState for titles
+    const [ titles, setTitles ] = useState([])
+
+    //selected title
+    const [ selection, setSelection ] = useState('')
+
+    //unique document id
+    const [ id, setId ] = useState('')
+
+    //run at start of page
+    getTitles()
+
+    async function getTitles(){
+        const response = await fetch('/api/getTitles', {
+        method:'POST',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json", 
+        },
+        })
+
+        //extract response here
+        if(!response.ok){
+        alert("Error getting titles")
+        } else {
+        
+        //extracting response
+        const titles = await response.json()
+        setTitles(titles.response)
+
+        }
+    }
+
+    //given the title selection post request to api
+    //fill in text boxes with response data
+    async function getDocument(e){
         e.preventDefault();
 
-        const res = await fetch('/api/contactUpdate', {
+        //post selected title 
+        const res = await fetch('/api/queryDocument', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                selection
+            }),
+        });
+
+        //response handling
+        if(!res.ok){
+            alert("Error!")
+        } else {
+            alert("loading data")
+
+            const doc = await res.json()
+
+            console.log(doc.response[0]._id)
+
+            //store document id for update
+            setId(doc.response[0]._id)
+            
+            //set all form values 
+            setEventTitle(doc.response[0].title)
+            setEventLocation(doc.response[0].location)
+            setEventDate(doc.response[0].date)
+            setEventStart(doc.response[0].startTime)
+            setEventEnd(doc.response[0].endTime)
+            setEventDescription(doc.response[0].description)
+        }
+    }
+
+    //sends data to api for document update
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        const res = await fetch('/api/updateDocument', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -27,11 +103,12 @@ export default function ContactFormEdit() {
                 eventTimeStart,
                 eventTimeEnd,
                 eventDescription,
+                id
             }),
         });
 
         if (res.ok) {
-            alert("Message sent succesfully")
+            alert("Updated succesfully")
             //reset the form
             e.target.eventTitle.value = "";
             e.target.eventDate.value = "";
@@ -42,19 +119,37 @@ export default function ContactFormEdit() {
             
         }
         if(!res.ok){
-          alert("Error sending message")
+          alert("Error")
         }
     };
 
     return (
         <>
+        {/**form for title selection */}
+        <div className='py-3'>
+            {/**run function to query and fill text boxes */}
+            <form onSubmit={getDocument}>
+                <label 
+                className='pr-1'
+                htmlFor='titleSelct'
+                >Select a title</label>
+
+                <select onChange={e => setSelection(e.target.value)} className="p-2 m-2" id="titles">
+                    {
+                    titles.map((e)=>(
+                        <option value={e.title}>{e.title}</option>
+                    ))
+                    }
+                </select>
+
+                <button
+                type='submit'
+                className='px-3 m-3 bg-blue-500 rounded-lg text-white font-bold'
+                >Go</button>
+            </form>
+        </div>
+
             <form onSubmit={handleSubmit} className="py-4 mt-4 border-t flex flex-col gap-5">
-                {/**dropdown to select previous events */}
-                <div>
-                    <h1 className="">Choose from event below</h1>
-
-                </div>
-
                 <div>
                     <label htmlFor="eventTitle">Event Title</label>
                     
@@ -121,7 +216,8 @@ export default function ContactFormEdit() {
 
                 <button
                 className="bg-green-700 p-3 text-white font-bold"
-                    type="submit">Post Event</button>
+                    type="submit"
+                    >Post Event</button>
             </form>
             <div className="pl-[20px] ">
                 <button

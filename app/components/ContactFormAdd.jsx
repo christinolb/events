@@ -14,7 +14,7 @@ export default function ContactForm() {
         e.preventDefault();
 
         //sending data to /pages/api/contact.ts
-        const res = await fetch('/api/contact', {
+        const res = await fetch('/api/addDocument', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
