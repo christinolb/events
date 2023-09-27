@@ -21,10 +21,12 @@ I plan to make a nav bar that will allow for a selection of several other forms 
 3. install next js
 4. run npm run dev to start
 
-
 ## Credits
  ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
 #### Links
 - https://www.typescriptlang.org/
 - https://www.youtube.com/watch?v=47rXJN5r5kc&t=814s 
 - https://www.youtube.com/watch?v=6DAozN-qxr0
+
+## License
+This project is licensed under the MIT license, Copyright (c) 2023 For more information see LICENSE.md.
