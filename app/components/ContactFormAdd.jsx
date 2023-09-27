@@ -1,4 +1,5 @@
-'use client';
+'use client'
+
 //must include use client when using useState!
 import { useState } from "react";
 

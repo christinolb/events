@@ -2,6 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGODB_URI;
 
+//solves response bug
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+}
 
 const client = new MongoClient(uri, {
     serverApi: {

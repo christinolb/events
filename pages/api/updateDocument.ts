@@ -4,6 +4,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGODB_URI;
 
+//solves response bug
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+}
 
 const client = new MongoClient(uri, {
     serverApi: {
@@ -43,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           //select cluster
           const myColl = myDB.collection("events");
           
-          const filter = { _id: id };
+          const filter = { "_id": id }; //try ObjectId(id)
           const updateDoc = {
             $set: {
                title: {title}.title,
@@ -57,8 +63,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           await myColl.updateOne(filter, updateDoc);
 
-          return res.status(200)
-      
+          return res.status(201).json({response : "success!"})
+  
+          } catch (error) {
+            
+            return res.status(500)
+
           } finally {
           // Ensures that the client will close when you finish/error
           await client.close();

@@ -110,12 +110,12 @@ export default function ContactFormEdit() {
         if (res.ok) {
             alert("Updated succesfully")
             //reset the form
-            e.target.eventTitle.value = "";
-            e.target.eventDate.value = "";
-            e.target.eventLocation.value = "";
-            e.target.eventTimeStart.value = "";
-            e.target.eventTimeEnd.value = "";
-            e.target.eventDescription.value = "";
+            setEventTitle("")
+            setEventLocation("")
+            setEventDate("")
+            setEventStart("")
+            setEventEnd("")
+            setEventDescription("")
             
         }
         if(!res.ok){
