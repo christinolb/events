@@ -45,6 +45,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           //query and running function
           const query = { title: selection }; 
           const result = await myColl.find(query).toArray(function(err, docs) { });
+          
+          console.log("selection", selection)
 
           //return query selection
           return res.status(200).json({response: result})

@@ -49,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           //select cluster
           const myColl = myDB.collection("events");
           
-          const filter = { "_id": id }; //try ObjectId(id)
+          const filter = { title : id }; //try ObjectId(id)
           const updateDoc = {
             $set: {
                title: {title}.title,
@@ -63,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           await myColl.updateOne(filter, updateDoc);
 
-          return res.status(201).json({response : "success!"})
+          return res.status(200).json({response : "success!"})
   
           } catch (error) {
             

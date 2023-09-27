@@ -71,10 +71,10 @@ export default function ContactFormEdit() {
 
             const doc = await res.json()
 
-            console.log(doc.response[0]._id)
+            console.log("doc.response", doc.response)
 
             //store document id for update
-            setId(doc.response[0]._id)
+            setId(doc.response[0].title)
             
             //set all form values 
             setEventTitle(doc.response[0].title)
@@ -83,6 +83,7 @@ export default function ContactFormEdit() {
             setEventStart(doc.response[0].startTime)
             setEventEnd(doc.response[0].endTime)
             setEventDescription(doc.response[0].description)
+            
         }
     }
 
@@ -93,7 +94,6 @@ export default function ContactFormEdit() {
         const res = await fetch('/api/updateDocument', {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
                 "Content-type": "application/json",
             },
             body: JSON.stringify({
@@ -137,7 +137,7 @@ export default function ContactFormEdit() {
                 <select onChange={e => setSelection(e.target.value)} className="p-2 m-2" id="titles">
                     {
                     titles.map((e)=>(
-                        <option value={e.title}>{e.title}</option>
+                        <option key={e.title} value={e.title}>{e.title}</option>
                     ))
                     }
                 </select>
