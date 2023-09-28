@@ -1,5 +1,3 @@
-//INCOMPLETE: Takes in title, makes query and returns the rest of the data
-
 import type { NextApiRequest, NextApiResponse } from "next";
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGODB_URI;
@@ -21,7 +19,7 @@ const client = new MongoClient(uri, {
 
 
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {   
+async function handler(req: NextApiRequest, res: NextApiResponse) {   
 
     //retrieval of data from clientside
     const {
@@ -46,8 +44,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const query = { title: selection }; 
           const result = await myColl.find(query).toArray(function(err, docs) { });
           
-          console.log("selection", selection)
-
           //return query selection
           return res.status(200).json({response: result})
       
@@ -56,6 +52,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           await client.close();
           }
       }
-      
-
 }

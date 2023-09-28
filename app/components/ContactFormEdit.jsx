@@ -22,9 +22,7 @@ export default function ContactFormEdit() {
     //unique document id
     const [ id, setId ] = useState('')
 
-    //run at start of page
-    getTitles()
-
+    /** QUERY TITLES */
     async function getTitles(){
         const response = await fetch('/api/getTitles', {
         method:'POST',
@@ -33,7 +31,7 @@ export default function ContactFormEdit() {
             "Content-Type": "application/json", 
         },
         })
-
+    
         //extract response here
         if(!response.ok){
         alert("Error getting titles")
@@ -41,11 +39,16 @@ export default function ContactFormEdit() {
         
         //extracting response
         const titles = await response.json()
-        setTitles(titles.response)
-
+        setTitles(titles.response);
+        
+        
         }
+    
     }
+    //run
+    getTitles()
 
+    
     //given the title selection post request to api
     //fill in text boxes with response data
     async function getDocument(e){
@@ -87,7 +90,7 @@ export default function ContactFormEdit() {
         }
     }
 
-    //sends data to api for document update
+    /**SEND DATA TO API (updateDocument)*/
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -123,6 +126,8 @@ export default function ContactFormEdit() {
         }
     };
 
+    /**HANDLE REMOVE */
+
     return (
         <>
         {/**form for title selection */}
@@ -136,7 +141,7 @@ export default function ContactFormEdit() {
 
                 <select onChange={e => setSelection(e.target.value)} className="p-2 m-2" id="titles">
                     {
-                    titles.map((e)=>(
+                    titles.map((e) => (
                         <option key={e.title} value={e.title}>{e.title}</option>
                     ))
                     }
@@ -144,7 +149,7 @@ export default function ContactFormEdit() {
 
                 <button
                 type='submit'
-                className='px-3 m-3 bg-blue-500 rounded-lg text-white font-bold'
+                className='px-3 m-3 bg-blue-500 rounded-lg text-white font-bold transition delay-75 hover:scale-105 active:scale-95'
                 >Go</button>
             </form>
         </div>
@@ -215,17 +220,22 @@ export default function ContactFormEdit() {
                 </div>
 
                 <button
-                className="bg-green-700 p-3 text-white font-bold"
+                className="bg-green-700 p-3 rounded-lg transition delay-75 hover:scale-105 active:scale-95 text-white font-bold"
                     type="submit"
                     >Post Event</button>
             </form>
             <div className="pl-[20px] ">
-                <button
-                    className="m-2 p-2 border bg-red-600 text-white font-bold rounded-xl"
-                    >
-                    Remove
-                </button>
+                <form onSubmit={console.log("clicked!")}>
+                    <button
+                        onClick={(e) => e.preventDefault()}
+                        type="submit"
+                        className="m-2 p-2 border bg-red-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95"
+                        >
+                        Remove Event
+                    </button>
+                </form>
             </div>
+
         </>
     )
 }
