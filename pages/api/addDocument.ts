@@ -62,11 +62,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           //insertion of data
           await myColl.insertMany(docs);  
 
-          return res.status(201).json({response : "success!"})
+          return res.status(201).json({response : "Event posted successfully."})
   
           } catch (error) {
             
-            return res.status(500)
+            return res.status(500).json({response: "Failed to post event."})
 
           } finally {
           // Ensures that the client will close when you finish/error

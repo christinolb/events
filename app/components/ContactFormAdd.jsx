@@ -31,19 +31,24 @@ export default function ContactForm() {
             }),
         });
 
+        //getting response from api
+        const msg = await res.json()
+
+        //response handling
         if (res.ok) {
-            alert("Message sent succesfully")
+            alert(msg.response)
+            
             //reset the form
-            e.target.eventTitle.value = "";
-            e.target.eventDate.value = "";
-            e.target.eventLocation.value = "";
-            e.target.eventTimeStart.value = "";
-            e.target.eventTimeEnd.value = "";
-            e.target.eventDescription.value = "";
+            setEventTitle("")
+            setEventLocation("")
+            setEventDate("")
+            setEventStart("")
+            setEventEnd("")
+            setEventDescription("")
             
         }
         if(!res.ok){
-          alert("Error sending message")
+            alert(msg.response)
         }
 
     };
@@ -55,6 +60,7 @@ export default function ContactForm() {
                     <label htmlFor="eventTitle">Event Title</label>
                     
                     <input
+                        required
                         onChange={e => setEventTitle(e.target.value)}
                         value={eventTitle}
                         type="text"
@@ -66,6 +72,7 @@ export default function ContactForm() {
                 <div>
                     <label htmlFor="eventLocation">Event Location</label>
                     <input
+                        required
                         onChange={e => setEventLocation(e.target.value)}
                         value={eventLocation}
                         type="text"
@@ -77,6 +84,7 @@ export default function ContactForm() {
                 <div>
                     <label htmlFor="eventDate">Event Date</label>
                     <input
+                        required
                         onChange={e => setEventDate(e.target.value)}
                         value={eventDate}
                         type="date"
@@ -88,6 +96,7 @@ export default function ContactForm() {
                 <div>
                     <label htmlFor="eventTime">Event Time</label>
                     <input
+                        required
                         onChange={e => setEventStart(e.target.value)}
                         value={eventTimeStart}
                         type="time"
@@ -97,6 +106,7 @@ export default function ContactForm() {
                     to 
                     
                     <input
+                        required
                         onChange={e => setEventEnd(e.target.value)}
                         value={eventTimeEnd}
                         type="time"
@@ -107,6 +117,7 @@ export default function ContactForm() {
                 <div>
                     <label htmlFor="eventDescription">Event Description</label>
                     <textarea
+                        required
                         onChange={e => setEventDescription(e.target.value)}
                         value={eventDescription}
                         className="h-32 "
@@ -116,7 +127,7 @@ export default function ContactForm() {
                 </div>
 
                 <button
-                className="bg-green-700 p-3 text-white font-bold"
+                className="bg-green-700 p-3 rounded-lg transition delay-75 hover:scale-105 active:scale-95 text-white font-bold"
                     type="submit">Post Event</button>
             </form>
         </>

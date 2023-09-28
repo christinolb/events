@@ -19,7 +19,7 @@ const client = new MongoClient(uri, {
 
 
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {   
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {   
 
     //retrieval of data from clientside
     const {
@@ -45,7 +45,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           const result = await myColl.find(query).toArray(function(err, docs) { });
           
           //return query selection
-          return res.status(200).json({response: result})
+          return res.status(200).json({response: result, msg: "Loading ..."})
+
+        } catch (error){
+          return res.status(500).json({msg: "Error loading event."})
       
           } finally {
           // Ensures that the client will close when you finish/error

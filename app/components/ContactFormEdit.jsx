@@ -2,7 +2,7 @@
 
 //MISSING: make main form unusable until a title is selected
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ContactFormEdit() {
     //Main form
@@ -22,6 +22,16 @@ export default function ContactFormEdit() {
     //unique document id
     const [ id, setId ] = useState('')
 
+    //set value
+    function setForm(title="", date="", location="", start="", end="", description=""){
+        setEventTitle(title)
+        setEventLocation(location)
+        setEventDate(date)
+        setEventStart(start)
+        setEventEnd(end)
+        setEventDescription(description)
+    }
+
     /** QUERY TITLES */
     async function getTitles(){
         const response = await fetch('/api/getTitles', {
@@ -31,31 +41,34 @@ export default function ContactFormEdit() {
             "Content-Type": "application/json", 
         },
         })
-    
-        //extract response here
+
+        //get response json
+        const resp = await response.json()
+        
+        //response handling
         if(!response.ok){
-        alert("Error getting titles")
+        alert(resp.msg)
         } else {
         
-        //extracting response
-        const titles = await response.json()
-        setTitles(titles.response);
+        //setting titles
+        setTitles(resp.response);
         
         
         }
     
     }
-    //run
-    getTitles()
+    //run on page startup once
+    useEffect(() => {
+        getTitles()
+    }, [])
 
     
-    //given the title selection post request to api
-    //fill in text boxes with response data
+    /**QUERY EVENT AND FILL FORM (queryDocument) */
     async function getDocument(e){
         e.preventDefault();
 
         //post selected title 
-        const res = await fetch('/api/queryDocument', {
+        const response = await fetch('/api/queryDocument', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -66,35 +79,35 @@ export default function ContactFormEdit() {
             }),
         });
 
+        //get response json
+        const resp = await response.json()
+
         //response handling
-        if(!res.ok){
-            alert("Error!")
+        if(!response.ok){
+            alert(resp.msg)
         } else {
-            alert("loading data")
-
-            const doc = await res.json()
-
-            console.log("doc.response", doc.response)
+            alert(resp.msg)
 
             //store document id for update
-            setId(doc.response[0].title)
-            
-            //set all form values 
-            setEventTitle(doc.response[0].title)
-            setEventLocation(doc.response[0].location)
-            setEventDate(doc.response[0].date)
-            setEventStart(doc.response[0].startTime)
-            setEventEnd(doc.response[0].endTime)
-            setEventDescription(doc.response[0].description)
-            
+            setId(resp.response[0].title)
+
+            //Fill form with query
+            setForm(
+                resp.response[0].title,
+                resp.response[0].date,
+                resp.response[0].location,
+                resp.response[0].startTime,
+                resp.response[0].endTime,
+                resp.response[0].description
+            )   
         }
     }
 
-    /**SEND DATA TO API (updateDocument)*/
+    /**SEND FORM DATA TO API (updateDocument)*/
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const res = await fetch('/api/updateDocument', {
+        const response = await fetch('/api/updateDocument', {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",
@@ -110,23 +123,52 @@ export default function ContactFormEdit() {
             }),
         });
 
-        if (res.ok) {
-            alert("Updated succesfully")
-            //reset the form
-            setEventTitle("")
-            setEventLocation("")
-            setEventDate("")
-            setEventStart("")
-            setEventEnd("")
-            setEventDescription("")
+        //get response json
+        const resp = await response.json()
+
+        if (!response.ok) {
+            alert(resp.msg)
             
-        }
-        if(!res.ok){
-          alert("Error")
+        } else {
+            alert(resp.msg)
+
+            //reset the form
+            setForm()
         }
     };
 
-    /**HANDLE REMOVE */
+    /**HANDLE REMOVE (removeDocument)*/
+    async function handleRemove(e){
+        e.preventDefault()
+
+        if(confirm("Are you sure you want to remove this event?")){
+            const response = await fetch('/api/removeDocument', {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    selection
+                }),
+            });
+    
+            //get response json
+            const resp = await response.json()
+    
+            //handle response
+            if(!response.ok){
+                alert(resp.msg)
+            } else {
+                alert(resp.msg)
+    
+                //reset the form
+                setForm()
+    
+                //refresh page
+                window.location.reload()
+            }
+        } 
+    }
 
     return (
         <>
@@ -139,7 +181,8 @@ export default function ContactFormEdit() {
                 htmlFor='titleSelct'
                 >Select a title</label>
 
-                <select onChange={e => setSelection(e.target.value)} className="p-2 m-2" id="titles">
+                <select required onChange={e => setSelection(e.target.value)} className="p-2 m-2" id="titleSelct">
+                    <option value={selection}>- Choose an option -</option>
                     {
                     titles.map((e) => (
                         <option key={e.title} value={e.title}>{e.title}</option>
@@ -159,6 +202,7 @@ export default function ContactFormEdit() {
                     <label htmlFor="eventTitle">Event Title</label>
                     
                     <input
+                        required
                         onChange={e => setEventTitle(e.target.value)}
                         value={eventTitle}
                         type="text"
@@ -170,6 +214,7 @@ export default function ContactFormEdit() {
                 <div>
                     <label htmlFor="eventLocation">Event Location</label>
                     <input
+                        required
                         onChange={e => setEventLocation(e.target.value)}
                         value={eventLocation}
                         type="text"
@@ -181,6 +226,7 @@ export default function ContactFormEdit() {
                 <div>
                     <label htmlFor="eventDate">Event Date</label>
                     <input
+                        required
                         onChange={e => setEventDate(e.target.value)}
                         value={eventDate}
                         type="date"
@@ -192,6 +238,7 @@ export default function ContactFormEdit() {
                 <div>
                     <label htmlFor="eventTime">Event Time</label>
                     <input
+                        required
                         onChange={e => setEventStart(e.target.value)}
                         value={eventTimeStart}
                         type="time"
@@ -201,6 +248,7 @@ export default function ContactFormEdit() {
                     to 
                     
                     <input
+                        required
                         onChange={e => setEventEnd(e.target.value)}
                         value={eventTimeEnd}
                         type="time"
@@ -211,6 +259,7 @@ export default function ContactFormEdit() {
                 <div>
                     <label htmlFor="eventDescription">Event Description</label>
                     <textarea
+                        required
                         onChange={e => setEventDescription(e.target.value)}
                         value={eventDescription}
                         className="h-32 "
@@ -224,10 +273,10 @@ export default function ContactFormEdit() {
                     type="submit"
                     >Post Event</button>
             </form>
+
             <div className="pl-[20px] ">
-                <form onSubmit={console.log("clicked!")}>
+                <form onSubmit={handleRemove}>
                     <button
-                        onClick={(e) => e.preventDefault()}
                         type="submit"
                         className="m-2 p-2 border bg-red-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95"
                         >
@@ -235,7 +284,6 @@ export default function ContactFormEdit() {
                     </button>
                 </form>
             </div>
-
         </>
     )
 }

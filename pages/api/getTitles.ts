@@ -42,7 +42,7 @@ export default async function GetTitles(req: NextApiRequest, res: NextApiRespons
           return res.status(200).json({response: result})
 
         } catch (error) {
-            res.status(500)
+            res.status(500).json({msg: "Error getting titles."})
       
         } finally {
             // Ensures that the client will close when you finish/error
