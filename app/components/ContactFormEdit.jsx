@@ -53,9 +53,7 @@ export default function ContactFormEdit() {
         //setting titles
         setTitles(resp.response);
         
-        
         }
-    
     }
     //run on page startup once
     useEffect(() => {
