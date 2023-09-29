@@ -36,7 +36,7 @@ export default async function GetTitles(req: NextApiRequest, res: NextApiRespons
           
           //query and running function
           const query = { id: 1 }; 
-          const result = await myColl.find(query).toArray(function(err, docs) { });
+          const result = await myColl.find(query).toArray({ });
 
           // send titles to availableDocQuery
           return res.status(200).json({response: result})
