@@ -12,14 +12,13 @@ export default function Login(){
         e.preventDefault()
 
         window.location = '/add'
-        console.log("pwd: ", process.env.PASSWORD)
 
-        /**if ( password === "123" ){
+        if ( password === process.env.PASSWORD ){
             //REDIRECT
             window.location = '/add'
         } else {
             alert("Incorrect credentials")
-        }*/
+        }
     }
     
     return(
