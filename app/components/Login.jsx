@@ -11,7 +11,8 @@ export default function Login(){
     function validate(e){
         e.preventDefault()
 
-        if ( password === process.env.PASSWORD ){
+        //fix 
+        if ( password == process.env.PASSWORD ){
             //REDIRECT
             window.location = '/add'
         } else {
