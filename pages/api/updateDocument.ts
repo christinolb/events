@@ -1,5 +1,5 @@
 //UPDATE API
-//
+
 import type { NextApiRequest, NextApiResponse } from "next";
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGODB_URI;

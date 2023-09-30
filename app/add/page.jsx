@@ -1,5 +1,6 @@
 import FormTypeButtons from "../components/FormSelctButtons"
 import ContactFormAdd from "../components/ContactFormAdd"
+import ToggleSwitch from "../components/ToggleSwitch"
 
 export default function Add() {
   return (
@@ -8,6 +9,7 @@ export default function Add() {
       <p>Please fill in the form below</p>
       <ContactFormAdd />
       <FormTypeButtons />
+      <ToggleSwitch/>
     </div>
   )
 }

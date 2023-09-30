@@ -1,5 +1,6 @@
 import ContactFormEdit from "../components/ContactFormEdit";
 import FormSelctButtons from "../components/FormSelctButtons";
+import ToggleSwitch from "../components/ToggleSwitch";
 
 
 export default function Edit() {  
@@ -9,6 +10,8 @@ export default function Edit() {
 
       <ContactFormEdit />
       <FormSelctButtons />
+      <ToggleSwitch/>
+      
     </div>
   )
 }
