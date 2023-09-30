@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           //create obj
           const docs = [
             {
-               id: 1,
+               type: "present",
                title: {title}.title,
                location: {location}.location,
                date: {date}.date,

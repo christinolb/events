@@ -35,7 +35,7 @@ export default async function GetTitles(req: NextApiRequest, res: NextApiRespons
           const myColl = myDB.collection("events");
           
           //query and running function
-          const query = { id: 1 }; 
+          const query = { type: "present" }; 
           const result = await myColl.find(query).toArray({ });
 
           // send titles to availableDocQuery
