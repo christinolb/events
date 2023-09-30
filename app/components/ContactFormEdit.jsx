@@ -22,7 +22,22 @@ export default function ContactFormEdit() {
     //unique document id
     const [ id, setId ] = useState('')
 
-    //set value
+    //toggle switch
+    const [ isPast, setIsPast ] = useState("NO")
+
+    //toggle switch
+    function toggle(e){  
+        
+        if (isPast == "NO"){
+            setIsPast("YES")
+            getTitles() 
+        } else {
+            setIsPast("NO")
+            getTitles() 
+        }
+    }
+
+    //set value of form
     function setForm(title="", date="", location="", start="", end="", description=""){
         setEventTitle(title)
         setEventLocation(location)
@@ -40,6 +55,9 @@ export default function ContactFormEdit() {
             'Accept': 'application/json',
             "Content-Type": "application/json", 
         },
+            body: JSON.stringify({
+                isPast
+            })
         })
 
         //get response json
@@ -171,7 +189,27 @@ export default function ContactFormEdit() {
     return (
         <>
         {/**form for title selection */}
-        <div className='py-3'>
+        
+
+            {/**TOGGLE SWITCH */}
+            <label className="relative inline-block w-[60px] h-[34px]">
+                <input
+                    id="input"
+                    type="checkbox"
+                    className="opacity-0 width-[0] height-[0]"
+                    onInput={toggle}
+                />
+                <span 
+                    id="slider" 
+                    className="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-[#ccc] transition-[.4s]">
+
+                </span>
+            </label>
+            
+            <p className="font-bold">PAST EVENTS ACTIVE: {isPast}</p>
+
+        <div className=''>
+
             {/**run function to query and fill text boxes */}
             <form onSubmit={getDocument}>
                 <label 

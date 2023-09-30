@@ -20,6 +20,8 @@ const client = new MongoClient(uri, {
 
 
 export default async function GetTitles(req: NextApiRequest, res: NextApiResponse) { 
+    const { isPast } = req.body
+
     getTitles().catch(console.dir);
 
     //function which takes in and send data from client to db
@@ -35,7 +37,7 @@ export default async function GetTitles(req: NextApiRequest, res: NextApiRespons
           const myColl = myDB.collection("events");
           
           //query and running function
-          const query = { type: "present" }; 
+          const query = { past: isPast }; 
           const result = await myColl.find(query).toArray({ });
 
           // send titles to availableDocQuery

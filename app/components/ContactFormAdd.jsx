@@ -11,6 +11,20 @@ export default function ContactForm() {
     const [eventTimeEnd, setEventEnd] = useState('')
     const [eventDescription, setEventDescription] = useState('')
 
+    //toggle switch
+    const [ isPast, setIsPast ] = useState("NO")
+
+    //toggle switch
+    function toggle(e){
+        e.preventDefault()
+        
+        if (isPast == "NO"){
+            setIsPast("YES")
+        } else {
+            setIsPast("NO")
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -28,6 +42,7 @@ export default function ContactForm() {
                 eventTimeStart,
                 eventTimeEnd,
                 eventDescription,
+                isPast
             }),
         });
 
@@ -55,7 +70,22 @@ export default function ContactForm() {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="py-4 mt-4 border-t flex flex-col gap-5">
+            <label className="relative inline-block w-[60px] h-[34px]">
+                <input
+                    id="input"
+                    type="checkbox"
+                    className="opacity-0 width-[0] height-[0]"
+                    onInput={toggle}
+                />
+                <span 
+                    id="slider" 
+                    className="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-[#ccc] transition-[.4s]">
+
+                </span>
+            </label>
+            
+            <p className="font-bold">PAST EVENTS ACTIVE: {isPast}</p>
+            <form onSubmit={handleSubmit} className="mt-4 border-t flex flex-col gap-5">
                 <div>
                     <label htmlFor="eventTitle">Event Title</label>
                     
@@ -133,8 +163,3 @@ export default function ContactForm() {
         </>
     )
 }
-/**
-onChange={e => setEventTitle(e.target.value)}
-Explaination:
-- will store value from input field to eventTitle defined in server side.
-*/

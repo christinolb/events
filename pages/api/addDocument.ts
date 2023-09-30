@@ -29,7 +29,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     eventDate,
     eventTimeStart,
     eventTimeEnd,
-    eventDescription
+    eventDescription,
+    isPast
 } = req.body;
 
     //adding data to db
@@ -50,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           //create obj
           const docs = [
             {
-               type: "present",
+               past: isPast,
                title: {title}.title,
                location: {location}.location,
                date: {date}.date,
