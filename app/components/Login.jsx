@@ -10,7 +10,7 @@ export default function Login(){
     //validate login & redirect to add
     function validate(e){
         e.preventDefault()
-
+        
         if ( password == process.env.PASSWORD ){
             //REDIRECT
             window.location = '/add'
