@@ -25,17 +25,24 @@ export default function ContactFormEdit() {
     //toggle switch
     const [ isPast, setIsPast ] = useState("NO")
 
-    function toggleSwitch(e){
-        //e.preventDefault()
+    //Resolves issue in useState delay
+    const [ isPastNeg, setIsPastNeg ] = useState("")
 
-        if(!e.target.checked){
-            setIsPast('YES')
-        } else {
-            setIsPast('NO')
-        }
-
-        //get titles
+    function toggleSwitch(){
         getTitles()
+
+        if(isPast == 'NO'){
+
+            setIsPast("YES")
+            setIsPastNeg("NO")
+
+
+        } else {
+
+            setIsPast('NO')
+            setIsPastNeg("YES")
+
+        }
 
     }
 
@@ -77,8 +84,14 @@ export default function ContactFormEdit() {
         }
     }
     //run on page startup once
+    /**useEffect(() => {
+        setTimeout(() => {
+          setCount((count) => count + 1);
+        }, 1000);
+      });*/
+
     useEffect(() => {
-        getTitles()
+        toggleSwitch()
     }, [])
 
     
@@ -201,6 +214,7 @@ export default function ContactFormEdit() {
                     type="checkbox"
                     className="opacity-0 width-[0] height-[0]"
                     onInput={toggleSwitch}
+                    //onChange={toggleSwitch}
                 />
                 <span 
                     id="slider" 
@@ -209,7 +223,7 @@ export default function ContactFormEdit() {
                 </span>
             </label>
             
-            <p className="font-bold">PAST EVENTS ACTIVE: {isPast}</p>
+            <p className="font-bold">TOGGLE PAST EVENTS: {isPastNeg}</p>
 
         <div className=''>
 

@@ -15,7 +15,7 @@ export default function ContactForm() {
     const [ isPast, setIsPast ] = useState("NO")
 
     //toggle switch
-    function toggle(e){
+    function toggleSwitch(e){
         e.preventDefault()
         
         if (isPast == "NO"){
@@ -75,7 +75,7 @@ export default function ContactForm() {
                     id="input"
                     type="checkbox"
                     className="opacity-0 width-[0] height-[0]"
-                    onInput={toggle}
+                    onInput={toggleSwitch}
                 />
                 <span 
                     id="slider" 
