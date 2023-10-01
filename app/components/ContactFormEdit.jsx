@@ -25,16 +25,18 @@ export default function ContactFormEdit() {
     //toggle switch
     const [ isPast, setIsPast ] = useState("NO")
 
-    //toggle switch
-    function toggle(e){  
-        
-        if (isPast == "NO"){
-            setIsPast("YES")
-            getTitles() 
+    function toggleSwitch(e){
+        //e.preventDefault()
+
+        if(!e.target.checked){
+            setIsPast('YES')
         } else {
-            setIsPast("NO")
-            getTitles() 
+            setIsPast('NO')
         }
+
+        //get titles
+        getTitles()
+
     }
 
     //set value of form
@@ -49,6 +51,7 @@ export default function ContactFormEdit() {
 
     /** QUERY TITLES */
     async function getTitles(){
+        
         const response = await fetch('/api/getTitles', {
         method:'POST',
         headers: {
@@ -197,7 +200,7 @@ export default function ContactFormEdit() {
                     id="input"
                     type="checkbox"
                     className="opacity-0 width-[0] height-[0]"
-                    onInput={toggle}
+                    onInput={toggleSwitch}
                 />
                 <span 
                     id="slider" 
