@@ -223,7 +223,7 @@ export default function ContactFormEdit() {
                 </span>
             </label>
             
-            <p className="font-bold">TOGGLE PAST EVENTS: {isPastNeg}</p>
+            <p className="font-bold">PAST EVENTS ACTIVE: {isPastNeg}</p>
 
         <div className=''>
 
