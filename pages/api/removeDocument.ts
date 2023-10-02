@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             //delete doc 
             const doc = [
                 {
-                    title: selection
+                    $title: selection
                 },
             ];
             
