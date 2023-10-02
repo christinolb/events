@@ -43,11 +43,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             
             await myColl.deleteOne(doc)
 
-            return res.status(201).json({response : "Event removed successfully."})
+            return res.status(201).json({msg: "Event removed successfully."})
 
             } catch (error) {
                 
-                return res.status(500).json({response: "Failed to remove event."})
+                return res.status(500).json({msg: "Failed to remove event."})
 
             } finally {
             // Ensures that the client will close when you finish/error
