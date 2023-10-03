@@ -64,7 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           await myColl.updateOne(filter, updateDoc);
 
           return res.status(200).json({msg: "Event successfully updated!"})
-  
+   
           } catch (error) {
             
             return res.status(500).json({msg: "Failed to update event."})
