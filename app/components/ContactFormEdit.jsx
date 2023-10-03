@@ -311,7 +311,7 @@ export default function ContactFormEdit() {
                     />
                 </div>
 
-                <div>
+                {/**<div>
                     <label htmlFor="eventDescription">Event Description</label>
                     <textarea
                         required
@@ -321,14 +321,14 @@ export default function ContactFormEdit() {
                         id="eventDescription"
                         placeholder="Event Description"
                     />
-                </div>
+                </div>*/}
 
                 <button
                 className="bg-green-700 p-3 rounded-lg transition delay-75 hover:scale-105 active:scale-95 text-white font-bold"
                     type="submit"
                     >Post Event</button>
                 <div className="">
-                    <div className="text-center"><a className="hover:underline hover:text-blue-400 w-fit" href="">Link to your website</a></div>
+                    <div className="text-center"><a className="hover:underline hover:text-blue-400 w-fit" href="https://run-gslsamp-site-fork.vercel.app/">Link to your website</a></div>
                 </div>
             </form>
 
