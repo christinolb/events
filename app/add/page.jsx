@@ -1,4 +1,3 @@
-import FormTypeButtons from "../components/FormSelctButtons"
 import ContactFormAdd from "../components/ContactFormAdd"
 
 export default function Add() {
@@ -7,7 +6,6 @@ export default function Add() {
       <h1 className='text-3xl font-bold'>Add Event Form </h1>
       <p>Please fill in the form below</p>
       <ContactFormAdd />
-      <FormTypeButtons />
     </div>
   )
 }

@@ -14,9 +14,6 @@ textarea {
   @apply shadow-md px-6 py-2 border border-slate-300;
 }
 
-li {
-  @apply m-2 p-2 border bg-gray-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95;
-}
 
 /**TOGGLE SWITCH*/
 
