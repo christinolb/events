@@ -328,14 +328,14 @@ export default function ContactFormEdit() {
                     type="submit"
                     >Post Event</button>
                 <div className="">
-                    <div className="text-center"><a className="hover:underline hover:text-blue-400 w-fit" href="https://run-gslsamp-site-fork.vercel.app/events">Link to your website</a></div>
+                    <div className="text-center"><a className="hover:underline hover:text-blue-400 w-fit" href="">Link to your website</a></div>
                 </div>
             </form>
 
             <div className="pl-[20px] grid grid-flow-row">
                 <form onSubmit={handleRemove}>
                     <ul className="flex flex-row">
-                        <li className="m-2 p-2 border bg-gray-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95"><Link href="/add">Add New Event</Link></li>
+                        <li className="m-2 p-2 border bg-gray-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95"><Link href="/">Add New Event</Link></li>
                         <li className="m-2 p-2 border bg-gray-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95"><Link href="/edit">Edit Event</Link></li>
                         <li><button
                         type="submit"
