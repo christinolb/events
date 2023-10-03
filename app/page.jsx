@@ -1,8 +1,7 @@
-import Login from "./components/Login";
-
+import ContactFormAdd from "./components/ContactFormAdd"
 
 export default function Home(){
     return(
-        <Login />
+        <ContactFormAdd/>
     )
 }

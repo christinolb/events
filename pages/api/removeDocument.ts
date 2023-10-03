@@ -34,7 +34,7 @@ export default async function handleRemove(req: NextApiRequest, res: NextApiResp
           const myDB = client.db("web_content_test");
 
           //select cluster
-          const myColl = myDB.collection("events");
+          const myColl = myDB.collection("events_opp_test");
           
           //remove document
           const condition = {title: selection}

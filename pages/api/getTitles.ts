@@ -34,7 +34,7 @@ export default async function GetTitles(req: NextApiRequest, res: NextApiRespons
           const myDB = client.db("web_content_test");
 
           //select cluster
-          const myColl = myDB.collection("events");
+          const myColl = myDB.collection("events_opp_test");
           
           //query and running function
           const query = { past: isPast }; 

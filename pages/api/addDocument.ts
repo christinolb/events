@@ -46,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const myDB = client.db("web_content_test");
 
           //select cluster
-          const myColl = myDB.collection("events");
+          const myColl = myDB.collection("events_opp_test");
           
           //create obj
           const docs = [

@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Events Form',
+  title: 'Events Form Demo',
   description: 'Add and remove events for gs-lsamp events page',
 }
 
