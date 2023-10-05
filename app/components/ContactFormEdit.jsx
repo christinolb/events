@@ -5,7 +5,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-
 export default function ContactFormEdit() {
     //Main form
     const [eventTitle, setEventTitle] = useState('')

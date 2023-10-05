@@ -4,7 +4,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-
 export default function ContactForm() {
     const [eventTitle, setEventTitle] = useState('')
     const [eventDate, setEventDate] = useState('')
