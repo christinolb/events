@@ -2,6 +2,8 @@
 
 //must include use client when using useState!
 import { useState } from "react";
+import Link from "next/link";
+
 
 export default function ContactForm() {
     const [eventTitle, setEventTitle] = useState('')
@@ -160,6 +162,13 @@ export default function ContactForm() {
                 className="bg-green-700 p-3 rounded-lg transition delay-75 hover:scale-105 active:scale-95 text-white font-bold"
                     type="submit">Post Event</button>
             </form>
+
+            <div className="pl-[20px] grid grid-flow-row">
+                <ul className="flex flex-row">
+                    <li className="m-2 p-2 border bg-gray-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95"><Link href="/add">Add New Event</Link></li>
+                    <li className="m-2 p-2 border bg-gray-600 text-white font-bold rounded-xl transition delay-75 hover:scale-105 active:scale-95"><Link href="/edit">Edit Event</Link></li>
+                </ul>
+            </div>
         </>
     )
 }
