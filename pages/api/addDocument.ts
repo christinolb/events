@@ -61,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             },
           ];
           //insertion of data
-          await myColl.insertMany(docs);  
+          await myColl.insertMany(docs);   
 
           return res.status(201).json({response: "Event posted successfully."})
   
